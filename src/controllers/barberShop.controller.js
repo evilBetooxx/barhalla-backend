@@ -79,4 +79,4 @@ export const deleteBarberShop = async (req, res) => {
       .status(500)
       .json({ message: "Error al eliminar la barbería", error: error.message });
   }
-};
+}

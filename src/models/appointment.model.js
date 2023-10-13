@@ -6,11 +6,6 @@ const appointmentSchema = new mongoose.Schema({
         ref: "Client",
         required: true
     },
-    barberShopID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "BarberShop",
-        required: true
-    },
     appointmentDate: {
         type: Date,
         required: true

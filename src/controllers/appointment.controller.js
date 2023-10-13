@@ -4,7 +4,6 @@ export const getAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find({ clientID: req.user.id })
       .populate("clientID")
-      .populate("barberShopID");
     res.json(appointments);
   } catch (error) {
     res
@@ -28,12 +27,11 @@ export const getAppointment = async (req, res) => {
 
 export const createAppointment = async (req, res) => {
   try {
-    const { clientID, barberShopID, appointmentDate, appointmentTime } =
+    const {appointmentDate, appointmentTime } =
       req.body;
 
     const newAppointment = new Appointment({
-      clientID,
-      barberShopID,
+      clientID : req.user.id,
       appointmentDate,
       appointmentTime,
     });
