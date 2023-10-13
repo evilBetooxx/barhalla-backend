@@ -21,13 +21,23 @@ const barberShopSchema = new mongoose.Schema({
         },
       }
     ],
+    services: [{
+      name: {
+        type: String,
+        required: true
+      },
+      price: {
+        type: Number,
+        required: true
+      }
+    }],
     workingDays: [
       {
         day: {
           type: String,
           required: true
         },
-        workingHours: {
+        schedule: {
           type: String,
           required: true
         }
