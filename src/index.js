@@ -1,6 +1,11 @@
-import app from "./app";
-import {connectBD} from "./db";
+import app from "./app.js";
+import {connectDB} from "./db.js";
+import { config } from 'dotenv';
 
-connectBD()
+
+
+
+config();
+connectDB()
 app.listen(4000)
 console.log('Server on port 4000');
