@@ -34,12 +34,11 @@ export const updateBarberShopSchema = z.object({
             street: z.string({ required_error: 'Street is required' }).optional(),
         })
     ).optional(),
-    workingDays: z.array(
+    workingDays: 
         z.object({
             day: z.string({ required_error: 'Day is required' }).optional(),
             schedule: z.string({ required_error: 'Schedule is required' }).optional(),
-        })
-    ).optional(),
+        }),
     logoImage: z.string({ required_error: 'Logo Image is required' }).optional(),
     photos: z.array(
         z.object({

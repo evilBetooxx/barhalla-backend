@@ -3,6 +3,7 @@ import { authRequired } from "../middlewares/validateToken.js";
 import {
     getBarberShops,
     getBarberShop,
+    searchBarberShops,
     createBarberShop,
     updateBarberShop,
     deleteBarberShop
@@ -14,6 +15,7 @@ const router = Router();
 
 router.get("/barberShops", authRequired, getBarberShops);
 router.get("/barbershop/:id", authRequired, getBarberShop);
+router.get("/barbershops/search", authRequired, searchBarberShops);
 router.post("/barbershop", authRequired, validateSchema(createBarberShopSchema), createBarberShop);
 router.put("/barbershop/:id", authRequired, validateSchema(updateBarberShopSchema), updateBarberShop);
 router.delete("/barbershop/:id", authRequired, deleteBarberShop);

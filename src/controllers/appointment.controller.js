@@ -2,8 +2,9 @@ import Appointment from "../models/appointment.model.js";
 
 export const getAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find({ clientID: req.user.id })
-      .populate("clientID")
+    const appointments = await Appointment.find({
+      clientID: req.user.id,
+    }).populate("clientID");
     res.json(appointments);
   } catch (error) {
     res
@@ -27,13 +28,14 @@ export const getAppointment = async (req, res) => {
 
 export const createAppointment = async (req, res) => {
   try {
-    const {appointmentDate, appointmentTime } =
-      req.body;
+    const { date, time, barberShopID, paymentID } = req.body;
 
     const newAppointment = new Appointment({
-      clientID : req.user.id,
-      appointmentDate,
-      appointmentTime,
+      date,
+      time,
+      clientID: req.user.id,
+      barberShopID,
+      paymentID
     });
 
     const savedAppointment = await newAppointment.save();

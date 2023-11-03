@@ -18,6 +18,8 @@ export const register = async (req, res) => {
       password: passwordHash,
     });
 
+    //agregar la foto default de cada perfil
+
     const clientSaved = await newClient.save();
     const token = await createAccessToken({ id: clientSaved._id });
     res.cookie("token", token);
