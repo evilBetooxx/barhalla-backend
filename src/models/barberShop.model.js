@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const barberShopSchema = new mongoose.Schema(
+  
   {
     name: {
       type: String,

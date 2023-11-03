@@ -11,6 +11,7 @@ import { updateClientSchema } from "../schemas/client.schema.js";
 
 const router = Router();
 
+
 router.get("/clients", authRequired, getClients);
 router.get("/client/:id", authRequired, getClient);
 router.put("/client/:id", authRequired, validateSchema(updateClientSchema), updateClient);

@@ -13,6 +13,7 @@ import { createBarberShopSchema, updateBarberShopSchema } from "../schemas/barbe
 
 const router = Router();
 
+
 router.get("/barberShops", authRequired, getBarberShops);
 router.get("/barbershop/:id", authRequired, getBarberShop);
 router.get("/barbershops/search", authRequired, searchBarberShops);

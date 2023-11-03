@@ -14,6 +14,7 @@ const router = Router();
 
 router.get("/appointments", authRequired, getAppointments);
 router.get("/appointment/:id", authRequired, getAppointment);
+
 router.post("/appointment", authRequired, validateSchema(createAppointmentSchema), createAppointment);
 router.put("/appointment/:id", authRequired, validateSchema(updateAppointmentSchema), updateAppointment);
 router.delete("/appointment/:id", authRequired, deleteAppointment);
