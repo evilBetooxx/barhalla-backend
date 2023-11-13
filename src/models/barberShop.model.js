@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const barberShopSchema = new mongoose.Schema(
-  
   {
     name: {
       type: String,
@@ -19,7 +18,7 @@ const barberShopSchema = new mongoose.Schema(
       street: {
         type: String,
         required: true,
-      }
+      },
     },
     services: [
       {
@@ -55,7 +54,6 @@ const barberShopSchema = new mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
-      required: true,
     },
     appointments: [
       {

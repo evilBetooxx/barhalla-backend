@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
-  
   {
     amount: {
       type: Number,
@@ -20,7 +19,7 @@ const paymentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "BarberShop",
       required: true,
-    }
+    },
   },
   {
     timestamps: true,

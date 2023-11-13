@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const clientSchema = new mongoose.Schema(
-  
   {
     firstName: {
       type: String,
@@ -21,7 +20,6 @@ const clientSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      required: true
     },
     barberShops: [
       {

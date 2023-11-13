@@ -30,11 +30,11 @@ export const searchBarberShops = async (req, res) => {
   const query = {};
 
   if (name) {
-    query.name = { $regex: name, $options: 'i' };
+    query.name = { $regex: name, $options: "i" };
   }
 
   if (city) {
-    query['location.city'] = city;
+    query["location.city"] = city;
   }
 
   try {
@@ -49,7 +49,16 @@ export const searchBarberShops = async (req, res) => {
 };
 
 export const createBarberShop = async (req, res) => {
-  const { name, description, location, services, workingDays, logoImage, photos, owner } = req.body;
+  const {
+    name,
+    description,
+    location,
+    services,
+    workingDays,
+    logoImage,
+    photos,
+  } = req.body;
+  const owner = req.user._id;
 
   try {
     const newBarberShop = new BarberShop({
@@ -60,7 +69,7 @@ export const createBarberShop = async (req, res) => {
       workingDays,
       logoImage,
       photos,
-      owner
+      owner,
     });
 
     const savedBarberShop = await newBarberShop.save();
@@ -104,4 +113,4 @@ export const deleteBarberShop = async (req, res) => {
       .status(500)
       .json({ message: "Error al eliminar la barbería", error: error.message });
   }
-}
+};

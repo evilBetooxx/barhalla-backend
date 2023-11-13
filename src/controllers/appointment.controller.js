@@ -35,7 +35,7 @@ export const createAppointment = async (req, res) => {
       time,
       clientID: req.user.id,
       barberShopID,
-      paymentID
+      paymentID,
     });
 
     const savedAppointment = await newAppointment.save();

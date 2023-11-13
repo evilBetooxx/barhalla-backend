@@ -1,13 +1,19 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const createAppointmentSchema = z.object({
-    clientID: z.string({ required_error: 'Client ID is required' }),
-    appointmentDate: z.string({ required_error: 'Appointment Date is required' }),
-    appointmentTime: z.string({ required_error: 'Appointment Time is required' }),
+  date: z.string({ required_error: "Date is required" }),
+  time: z.string({ required_error: "Time is required" }),
+  clientID: z.string({ required_error: "Client ID is required" }),
+  barberShopID: z.string({ required_error: "Barber Shop ID is required" }),
+  paymentID: z.string({ required_error: "Payment ID is required" }),
 });
 
 export const updateAppointmentSchema = z.object({
-    clientID: z.string({ required_error: 'Client ID is required' }).optional(),
-    appointmentDate: z.string({ required_error: 'Appointment Date is required' }).optional(),
-    appointmentTime: z.string({ required_error: 'Appointment Time is required' }).optional(),
+  date: z.string({ required_error: "Date is required" }).optional(),
+  time: z.string({ required_error: "Time is required" }).optional(),
+  clientID: z.string({ required_error: "Client ID is required" }).optional(),
+  barberShopID: z
+    .string({ required_error: "Barber Shop ID is required" })
+    .optional(),
+  paymentID: z.string({ required_error: "Payment ID is required" }).optional(),
 });

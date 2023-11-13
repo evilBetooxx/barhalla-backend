@@ -22,7 +22,6 @@ export const getClient = async (req, res) => {
 };
 
 export const updateClient = async (req, res) => {
-
   try {
     const updatedClient = await Client.findByIdAndUpdate(
       req.params.id,

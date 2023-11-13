@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 //export const createClientSchema = z.object({
 //    firstName: z.string({ required_error: 'First name is required' }),
@@ -8,8 +8,14 @@ import { z } from 'zod';
 // });
 
 export const updateClientSchema = z.object({
-    firstName: z.string({ required_error: 'First name is required' }).optional(),
-    lastName: z.string({ required_error: 'Last name is required' }).optional(),
-    email: z.string({ required_error: 'Email is required' }).email({ message: 'Invalid email' }).optional(),
-    password: z.string({ required_error: 'Password is required' }).min(6, { message: 'Password must be at least 6 characters long' }).optional(),
+  firstName: z.string({ required_error: "First name is required" }).optional(),
+  lastName: z.string({ required_error: "Last name is required" }).optional(),
+  email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "Invalid email" })
+    .optional(),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(6, { message: "Password must be at least 6 characters long" })
+    .optional(),
 });

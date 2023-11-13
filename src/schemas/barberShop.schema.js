@@ -1,50 +1,69 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const createBarberShopSchema = z.object({
-    name: z.string({ required_error: 'Name is required' }),
-    location: z.array(
-        z.object({
-            state: z.string({ required_error: 'State is required' }),
-            city: z.string({ required_error: 'City is required' }),
-            street: z.string({ required_error: 'Street is required' }),
-        })
-    ),
-    workingDays: z.array(
-        z.object({
-            day: z.string({ required_error: 'Day is required' }),
-            schedule: z.string({ required_error: 'Schedule is required' }),
-        })
-    ),
-    logoImage: z.string({ required_error: 'Logo Image is required' }),
-    photos: z.array(
-        z.object({
-            image: z.string({ required_error: 'Image URL is required' }),
-        })
-    ),
-    owner: z.string({ required_error: 'Owner ID is required' }),
+  name: z.string({ required_error: "Name is required" }),
+  description: z.string({ required_error: "Description is required" }),
+  location: z.object({
+    city: z.string({ required_error: "City is required" }),
+    street: z.string({ required_error: "Street is required" }),
+  }),
+  services: z.array(
+    z.object({
+      name: z.string({ required_error: "Service name is required" }),
+      price: z.number({ required_error: "Service price is required" }),
+    })
+  ),
+  workingDays: z.object({
+    days: z.string({ required_error: "Working days are required" }),
+    schedule: z.string({ required_error: "Working schedule is required" }),
+  }),
+  logoImage: z.string({ required_error: "Logo Image is required" }),
+  photos: z.array(
+    z.object({
+      imageURL: z.string({ required_error: "Image URL is required" }),
+    })
+  ),
 });
 
 export const updateBarberShopSchema = z.object({
-    userId: z.string({ required_error: 'User ID is required' }),
-    name: z.string({ required_error: 'Name is required' }).optional(),
-    location: z.array(
-        z.object({
-            state: z.string({ required_error: 'State is required' }).optional(),
-            city: z.string({ required_error: 'City is required' }).optional(),
-            street: z.string({ required_error: 'Street is required' }).optional(),
-        })
-    ).optional(),
-    workingDays: 
-        z.object({
-            day: z.string({ required_error: 'Day is required' }).optional(),
-            schedule: z.string({ required_error: 'Schedule is required' }).optional(),
-        }),
-    logoImage: z.string({ required_error: 'Logo Image is required' }).optional(),
-    photos: z.array(
-        z.object({
-            image: z.string({ required_error: 'Image URL is required' }).optional(),
-        })
-    ).optional(),
-    owner: z.string({ required_error: 'Owner ID is required' }).optional(),
+  name: z.string({ required_error: "Name is a string" }).optional(),
+  description: z
+    .string({ required_error: "Description is a string" })
+    .optional(),
+  location: z
+    .object({
+      city: z.string({ required_error: "City is a string" }).optional(),
+      street: z.string({ required_error: "Street is a string" }).optional(),
+    })
+    .optional(),
+  services: z
+    .array(
+      z.object({
+        name: z
+          .string({ required_error: "Service name is a string" })
+          .optional(),
+        price: z
+          .number({ required_error: "Service price is a number" })
+          .optional(),
+      })
+    )
+    .optional(),
+  workingDays: z
+    .object({
+      days: z.string({ required_error: "Working days is a string" }).optional(),
+      schedule: z
+        .string({ required_error: "Working schedule is a string" })
+        .optional(),
+    })
+    .optional(),
+  logoImage: z.string({ required_error: "Logo Image is a string" }).optional(),
+  photos: z
+    .array(
+      z.object({
+        imageURL: z
+          .string({ required_error: "Image URL is a string" })
+          .optional(),
+      })
+    )
+    .optional(),
 });
-
