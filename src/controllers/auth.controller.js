@@ -15,10 +15,8 @@ export const register = async (req, res) => {
       firstName,
       lastName,
       email,
-      password: passwordHash,
+      password: passwordHash
     });
-
-    //agregar la foto default de cada perfil
 
     const clientSaved = await newClient.save();
     const token = await createAccessToken({ id: clientSaved._id });

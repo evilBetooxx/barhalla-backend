@@ -1,7 +1,8 @@
 import Review from "../models/review.model.js";
 
 export const createReview = async (req, res) => {
-  const { title, comment, rating, clientID, barberShopID } = req.body;
+  const { title, comment, rating, barberShopID } = req.body;
+  const { clientID } = user.id;
 
   try {
     const newReview = new Review({
