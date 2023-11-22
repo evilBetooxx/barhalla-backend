@@ -13,8 +13,11 @@ import reviewRoutes from "./routes/review.routes.js";
 
 const app = express();
 
-config();
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}))
+config();   
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());

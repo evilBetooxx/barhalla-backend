@@ -5,17 +5,17 @@ export const registerSchema = z.object({
   lastName: z.string({ required_error: "Last Name is required" }),
   email: z
     .string({ required_error: "Email is required" })
-    .email({ message: "Invalid email" }),
+    .email({ message: "Email inválido" }),
   password: z
     .string({ required_error: "Password is required" })
-    .min(6, { message: "Password must be at least 6 characters long" }),
+    .min(6, { message: "Contraseña inválida" }),
 });
 
 export const loginSchema = z.object({
   email: z
     .string({ required_error: "Email is required" })
-    .email({ message: "Invalid email" }),
+    .email({ message: "Email inválido" }),
   password: z
     .string({ required_error: "Password is required" })
-    .min(6, { message: "Password must be at least 6 characters long" }),
+    .min(6, { message: "Contraseña inválida" }),
 });
