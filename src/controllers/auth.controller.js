@@ -2,6 +2,9 @@ import Client from "../models/client.model.js";
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
+import { config } from "dotenv";
+
+config();
 
 export const register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -69,17 +72,16 @@ export const logout = (req, res) => {
   return res.sendStatus(200);
 };
 
-export const verifyToken = async (req, res) => {
+export const verifyToken = async (req, res) => {  
   const { token } = req.cookies;
   if (!token) return res.status(401).json({ message: "No estás autorizado" });
   jwt.verify(token, process.env.TOKEN_SECRET, async (err, client) => {
     if (err) return res.status(401).json({ message: "No estás autorizado" });
 
     const clientFound = await Client.findById(client.id);
+
+    if (!clientFound) return res.status(401).json({ message: "No estás autorizado" });
     
-    if (!clientFound) {
-      return res.status(401).json({ message: "No estás autorizado" });
-    }
 
     return res.json({
       id: clientFound._id,
