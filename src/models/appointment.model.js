@@ -5,10 +5,19 @@ const appointmentSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: true,
+      default: Date.now,
     },
     time: {
       type: String,
       required: true,
+    },
+    service: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true
     },
     clientID: {
       type: mongoose.Schema.Types.ObjectId,

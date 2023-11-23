@@ -42,7 +42,7 @@ const barberShopSchema = new mongoose.Schema(
         required: true,
       },
     },
-    logoImage: {
+    logo: {
       type: String,
       required: true,
     },

@@ -12,6 +12,18 @@ export const getBarberShops = async (req, res) => {
   }
 };
 
+export const getUserBarberShops = async (req, res) => {
+  try {
+    const barberShops = await BarberShop.find({ owner: req.params.id });
+    res.json(barberShops);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener las barberías",
+      error: error.message,
+    });
+  }
+};
+
 export const getBarberShop = async (req, res) => {
   try {
     const barberShop = await BarberShop.findById(req.params.id);
@@ -26,38 +38,28 @@ export const getBarberShop = async (req, res) => {
 };
 
 export const searchBarberShops = async (req, res) => {
-  const { name, city } = req.query;
-  const query = {};
-
-  if (name) {
-    query.name = { $regex: name, $options: "i" };
-  }
-
-  if (city) {
-    query["location.city"] = city;
-  }
-
   try {
-    const barberShops = await BarberShop.find(query);
-    res.json(barberShops);
-  } catch (error) {
-    res.status(500).json({
-      message: "Error al buscar barberías",
-      error: error.message,
+    const { city, name } = req.body; 
+
+    if (!city || !name) {
+      return res.status(400).json({ error: "Faltan parámetros de búsqueda" });
+    }
+
+    const barberShops = await BarberShop.find({
+      "location.city": city,
+      name: name,
     });
+
+    return res.status(200).json({ barberShops });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "No se pudo buscar la barbería" });
   }
 };
 
 export const createBarberShop = async (req, res) => {
-  const {
-    name,
-    description,
-    location,
-    services,
-    workingDays,
-    logoImage,
-    photos,
-  } = req.body;
+  const { name, description, location, services, workingDays, logo, photos } =
+    req.body;
   const owner = req.user._id;
 
   try {
@@ -67,7 +69,7 @@ export const createBarberShop = async (req, res) => {
       location,
       services,
       workingDays,
-      logoImage,
+      logo,
       photos,
       owner,
     });
