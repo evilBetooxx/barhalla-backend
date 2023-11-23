@@ -39,7 +39,7 @@ export const getReviewsByUserId = async (req, res) => {
     if (!reviews) {
       return res.status(404).json({ message: "Aún no tienes reseñas" });
     }
-    res.status(200).json([reviews]);
+    res.status(200).json(reviews);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener las reseña" });
