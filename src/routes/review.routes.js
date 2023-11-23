@@ -3,7 +3,7 @@ import { authRequired } from "../middlewares/validateToken.js";
 import {
   createReview,
   getReviews,
-  getReviewById,
+  getReviewsByUserId,
   updateReview,
   deleteReview,
 } from "../controllers/review.controller.js";
@@ -14,7 +14,7 @@ const router = Router();
 
 router.post("/reviews", authRequired, validateSchema(createReviewSchema), createReview);
 router.get("/reviews", authRequired, getReviews);
-router.get("/review/:id", authRequired, getReviewById);
+router.get("/reviews/:id", authRequired, getReviewsByUserId);
 router.put("/review/:id", authRequired, validateSchema(updateReviewSchema), updateReview);
 router.delete("/review/:id", authRequired, deleteReview);
 

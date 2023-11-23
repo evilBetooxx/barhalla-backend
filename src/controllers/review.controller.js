@@ -31,18 +31,18 @@ export const getReviews = async (req, res) => {
   }
 };
 
-export const getReviewById = async (req, res) => {
+export const getReviewsByUserId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const review = await Review.findById(id);
-    if (!review) {
-      return res.status(404).json({ message: "Reseña no encontrada" });
+    const reviews = await Review.find({ clientID: id });
+    if (!reviews) {
+      return res.status(404).json({ message: "Aún no tienes reseñas" });
     }
-    res.status(200).json(review);
+    res.status(200).json([reviews]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al obtener la reseña" });
+    res.status(500).json({ message: "Error al obtener las reseña" });
   }
 };
 

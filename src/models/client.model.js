@@ -26,24 +26,28 @@ const clientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "BarberShop",
+        default: [],
       },
     ],
     appointments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Appointment",
+        default: [],
       },
     ],
     payments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Payment",
+        default: [],
       },
     ],
     reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review",
+        default: [],
       },
     ],
   },

@@ -93,7 +93,11 @@ export const verifyToken = async (req, res) => {
       lastName: clientFound.lastName,
       email: clientFound.email,
       photo: clientFound.photo,
-      createdAt: clientFound.createdAt
+      createdAt: clientFound.createdAt,
+      barberShops: clientFound.barberShops,
+      appointments: clientFound.appointments,
+      payments: clientFound.payments,
+      reviews: clientFound.reviews,
     });
   });
 };
