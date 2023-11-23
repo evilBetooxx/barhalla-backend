@@ -20,7 +20,7 @@ const clientSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      default: "https://res.cloudinary.com/dn1ng7anm/image/upload/v1699914249/xtoyv31uysdujmqrv7wn.jpg",
+      required: true,
     },
     barberShops: [
       {

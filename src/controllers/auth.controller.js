@@ -14,12 +14,14 @@ export const register = async (req, res) => {
     if (clientFound) return res.status(400).json(["El email está en uso"]);
 
     const passwordHash = await bcrypt.hash(password, 10);
+    const defaultPhoto = "https://res.cloudinary.com/dn1ng7anm/image/upload/v1699914249/xtoyv31uysdujmqrv7wn.jpg"
 
     const newClient = new Client({
       firstName,
       lastName,
       email,
       password: passwordHash,
+      photo: defaultPhoto,
     });
 
     const clientSaved = await newClient.save();
@@ -30,7 +32,9 @@ export const register = async (req, res) => {
       firstName: clientSaved.firstName,
       lastName: clientSaved.lastName,
       email: clientSaved.email,
+      photo: clientSaved.photo
     });
+
   } catch (error) {
     console.log(error);
   }
@@ -88,6 +92,8 @@ export const verifyToken = async (req, res) => {
       firstName: clientFound.firstName,
       lastName: clientFound.lastName,
       email: clientFound.email,
+      photo: clientFound.photo,
+      createdAt: clientFound.createdAt
     });
   });
 };

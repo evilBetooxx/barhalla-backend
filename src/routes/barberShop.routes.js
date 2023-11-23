@@ -12,7 +12,7 @@ import { validateSchema } from "../middlewares/validator.middleware.js";
 import { createBarberShopSchema, updateBarberShopSchema } from "../schemas/barberShop.schema.js";
 
 const router = Router();
-
+    
 
 router.get("/barberShops", authRequired, getBarberShops);
 router.get("/barbershop/:id", authRequired, getBarberShop);
