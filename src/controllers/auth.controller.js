@@ -14,8 +14,9 @@ export const register = async (req, res) => {
     if (clientFound) return res.status(400).json(["El email está en uso"]);
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const defaultPhoto = "https://res.cloudinary.com/dn1ng7anm/image/upload/v1699914249/xtoyv31uysdujmqrv7wn.jpg"
-
+    // const defaultPhoto = "https://res.cloudinary.com/dn1ng7anm/image/upload/v1699914249/xtoyv31uysdujmqrv7wn.jpg"
+    const defaultPhoto = "https://res.cloudinary.com/dn1ng7anm/image/upload/v1700758226/uyhpvsofxvzjmnzu6zq7.png"
+    
     const newClient = new Client({
       firstName,
       lastName,

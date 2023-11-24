@@ -93,9 +93,9 @@ export const createOrder = async (req, res) => {
     }
   );
 
-  console.log(response.data);
-
-  return res.json("ok");
+  // console.log(response.data);
+  const success = response.data.links[1].href
+  res.redirect(success);
 };
 
 export const captureOrder = async (req, res) => {
