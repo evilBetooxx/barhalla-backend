@@ -56,9 +56,9 @@ export const uploadImage = async (req, res) => {
     const result = await cloudinary.uploader.upload(imagenBuffer.path)
     console.log(result);
 
-    await Client.findByIdAndUpdate(req.client.id, { photo: result.secure_url }, { new: true });
+    await Client.findByIdAndUpdate(req.user.id, { photo: result.secure_url }, { new: true });
 
-    res.json(result.data);
+    res.json(result.data);  
   } catch (error) {
     console.log(error);
   }
