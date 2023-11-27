@@ -76,7 +76,7 @@ export const logout = (req, res) => {
   res.cookie("token", "", { expires: new Date(0) });
   return res.sendStatus(200);
 };
-
+  
 export const verifyToken = async (req, res) => {  
   const { token } = req.cookies;
   if (!token) return res.status(401).json({ message: "No estás autorizado" });

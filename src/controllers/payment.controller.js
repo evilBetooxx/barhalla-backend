@@ -33,7 +33,7 @@ export const createSession = async (req, res) => {
     line_items: [
       {
         price_data: {
-          currency: "usd",
+          currency: "MXN",
           product_data: {
             name: "T-shirt",
             description: "Comfortable cotton t-shirt",
@@ -44,8 +44,8 @@ export const createSession = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:4000/barhalla/success",
-    cancel_url: "http://localhost:4000/barhalla/cancel",
+    success_url: "http://localhost:5173/barhalla/success",
+    cancel_url: "http://localhost:5173/barhalla/cancel",
   });
 
   res.json(session);

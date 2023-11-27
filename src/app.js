@@ -11,13 +11,14 @@ import barbershopRoutes from "./routes/barbershop.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 
+config()
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5173"],
+    origin: process.env.CLIENT_URL,
     credentials: true
 }))
-config();   
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());

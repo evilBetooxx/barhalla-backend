@@ -58,7 +58,7 @@ export const searchBarberShops = async (req, res) => {
 };
 
 export const createBarberShop = async (req, res) => {
-  const { name, description, location, services, workingDays, logo, photos } =
+  const { name, description, location, services, workingDays, contact, logo, photos } =
     req.body;
   const owner = req.user._id;
 
@@ -69,6 +69,7 @@ export const createBarberShop = async (req, res) => {
       location,
       services,
       workingDays,
+      contact,
       logo,
       photos,
       owner,

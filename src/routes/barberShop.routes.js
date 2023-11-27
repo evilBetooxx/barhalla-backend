@@ -21,6 +21,6 @@ router.get("/barbershop/:id", authRequired, getBarberShop);
 router.get("/barbershops/search", authRequired, searchBarberShops);
 router.post("/barbershop", authRequired, validateSchema(createBarberShopSchema), createBarberShop);
 router.put("/barbershop/:id", authRequired, validateSchema(updateBarberShopSchema), updateBarberShop);
-router.delete("/barbershop/:id", authRequired, deleteBarberShop);
+router.delete("/barbaershop/:id", authRequired, deleteBarberShop);
 
 export default router;

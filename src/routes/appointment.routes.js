@@ -19,3 +19,4 @@ router.put("/appointment/:id", authRequired, validateSchema(updateAppointmentSch
 router.delete("/appointment/:id", authRequired, deleteAppointment);
 
 export default router;
+

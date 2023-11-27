@@ -42,6 +42,16 @@ const barberShopSchema = new mongoose.Schema(
         required: true,
       },
     },
+    contact: {
+      phone: {
+        type: Number,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+    },
     logo: {
       type: String,
       required: true,
