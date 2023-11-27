@@ -34,7 +34,7 @@ const router = Router();
 
 router.get("/clients", authRequired, getClients);
 router.get("/client/:id", authRequired, getClient);
-router.put("/client/:id", authRequired, validateSchema(updateClientSchema), updateClient);
+router.put("/client/:id", authRequired, updateClient);
 router.delete("/client/:id", authRequired, deleteClient);
 router.post("/upload", [authRequired, upload.single('file')] , uploadImage);
 

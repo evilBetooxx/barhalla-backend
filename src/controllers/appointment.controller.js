@@ -12,12 +12,16 @@ export const getAppointments = async (req, res) => {
   }
 };
 
-export const getAppointment = async (req, res) => {
+export const getUserAppointments = async (req, res) => {
+  const { id } = req.params.id;
   try {
-    const appointment = await Appointment.findById(req.params.id);
-    if (!appointment)
-      return res.status(404).json({ message: "Appointment not found" });
-    res.json(appointment);
+    console.log(req.params.id);
+    const appointments = await Appointment.find({ clientID: id });
+    if (!appointments) {
+      return res.status(404).json({ message: "Appointments not found" });
+    }
+    console.log(appointments);
+    res.status(200).json(appointments);
   } catch (error) {
     res
       .status(500)

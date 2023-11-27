@@ -23,10 +23,12 @@ export const getClient = async (req, res) => {
 };
 
 export const updateClient = async (req, res) => {
+  console.log(req.body);
+  const { firstName, lastName } = req.body;
   try {
     const updatedClient = await Client.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { firstName, lastName },
       { new: true }
     );
     if (!updatedClient) {
