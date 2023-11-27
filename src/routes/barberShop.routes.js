@@ -16,7 +16,7 @@ const router = Router();
     
 
 router.get("/barberShops", authRequired, getBarberShops);
-router.get("/user-barbershops/:id", authRequired, getUserBarberShops)
+router.get("/user-barbershops", authRequired, getUserBarberShops)
 router.get("/barbershop/:id", authRequired, getBarberShop);
 router.get("/barbershops/search", authRequired, searchBarberShops);
 router.post("/barbershop", authRequired, validateSchema(createBarberShopSchema), createBarberShop);
