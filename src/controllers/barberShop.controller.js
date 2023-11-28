@@ -17,7 +17,7 @@ export const getBarberShops = async (req, res) => {
 export const getUserBarberShops = async (req, res) => {
   console.log(req.user.id);
   try {
-    const barberShops = await BarberShop.find();
+    const barberShops = await BarberShop.find({ owner: req.user.id});
     res.status(200).json(barberShops);
   } catch (error) {
     res.status(500).json({
