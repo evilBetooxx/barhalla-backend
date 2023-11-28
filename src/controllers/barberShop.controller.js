@@ -1,5 +1,6 @@
 import BarberShop from "../models/barberShop.model.js";
-import mongoose from "mongoose";
+import Client from "../models/client.model.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const getBarberShops = async (req, res) => {
   try {
@@ -14,7 +15,7 @@ export const getBarberShops = async (req, res) => {
 };
 
 export const getUserBarberShops = async (req, res) => {
-  console.log(req.user._id);
+  console.log(req.user.id);
   try {
     const barberShops = await BarberShop.find();
     res.status(200).json(barberShops);
@@ -60,10 +61,8 @@ export const searchBarberShops = async (req, res) => {
 };
 
 export const createBarberShop = async (req, res) => {
-  const { name, description, location, services, workingDays, contact, logo, photos } =
-    req.body;
-  const owner = req.user._id;
-
+  console.log(req.body);
+  const { name, description, location, services, workingDays, contact, logo } = req.body;
   try {
     const newBarberShop = new BarberShop({
       name,
@@ -73,10 +72,8 @@ export const createBarberShop = async (req, res) => {
       workingDays,
       contact,
       logo,
-      photos,
-      owner,
+      owner: req.user.id,
     });
-
     const savedBarberShop = await newBarberShop.save();
     res.json(savedBarberShop);
   } catch (error) {
@@ -117,5 +114,17 @@ export const deleteBarberShop = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error al eliminar la barbería", error: error.message });
+  }
+};
+
+export const uploadLogo = async (req, res) => {
+  try {
+    const imagenBuffer = req.file;
+    const result = await cloudinary.uploader.upload(imagenBuffer.path)
+    console.log(result.secure_url);
+
+    res.json(result.secure_url);
+  } catch (error) {
+    console.log(error);
   }
 };
