@@ -74,6 +74,11 @@ export const createBarberShop = async (req, res) => {
       logo,
       owner: req.user.id,
     });
+
+    const client = await Client.findById(req.user.id);
+    client.barberShops.push(newBarberShop._id); 
+    await client.save();
+    
     const savedBarberShop = await newBarberShop.save();
     res.json(savedBarberShop);
   } catch (error) {

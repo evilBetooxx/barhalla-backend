@@ -2,7 +2,7 @@ import { Router } from "express";
 import { authRequired } from "../middlewares/validateToken.js";
 import {
   createReview,
-  getReviews,
+  getBarberReviews,
   getReviewsByUserId,
   updateReview,
   deleteReview,
@@ -12,10 +12,11 @@ import { createReviewSchema, updateReviewSchema } from "../schemas/review.schema
 
 const router = Router();
 
-router.post("/reviews", authRequired, validateSchema(createReviewSchema), createReview);
-router.get("/reviews", authRequired, getReviews);
+router.post("/reviews/:id", authRequired, createReview);
+router.get("/barber-reviews/:id", authRequired, getBarberReviews);
 router.get("/reviews/:id", authRequired, getReviewsByUserId);
 router.put("/review/:id", authRequired, validateSchema(updateReviewSchema), updateReview);
+
 router.delete("/review/:id", authRequired, deleteReview);
 
 export default router;

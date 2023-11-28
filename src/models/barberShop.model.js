@@ -61,7 +61,7 @@ const barberShopSchema = new mongoose.Schema(
       ref: "Client",
     },
     appointments: [
-      {
+      { 
         type: mongoose.Schema.Types.ObjectId,
         ref: "Appointment",
       },

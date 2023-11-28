@@ -46,7 +46,7 @@ router.post("/barbershop", authRequired, createBarberShop);
 router.post("/upload-logo", [authRequired, upload.single("file")], uploadLogo);
 
 router.put(
-  "/barbershop/:id",
+  " :id",
   authRequired,
   validateSchema(updateBarberShopSchema),
   updateBarberShop

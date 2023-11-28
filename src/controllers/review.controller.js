@@ -1,19 +1,32 @@
 import Review from "../models/review.model.js";
+import BarberShop from "../models/barberShop.model.js";
+import Client from "../models/client.model.js";
 
 export const createReview = async (req, res) => {
-  const { title, comment, rating, barberShopID } = req.body;
-  const { clientID } = user.id;
+  console.log(req.params.id);
+  console.log(req.body);
+  const { author, barberName, title, comment } = req.body;
 
   try {
     const newReview = new Review({
+      author,
+      barberName,
       title,
       comment,
-      rating,
-      clientID,
-      barberShopID,
+      clientID: req.user.id,
+      barberShopID: req.params.id,
     });
 
     const savedReview = await newReview.save();
+
+    const client = await Client.findById(req.user.id);
+    client.reviews.push(savedReview._id);
+    await client.save();
+
+    const barberShop = await BarberShop.findById(req.params.id);
+    barberShop.reviews.push(savedReview._id);
+    await barberShop.save();
+
     res.status(201).json(savedReview);
   } catch (error) {
     console.error(error);
@@ -21,9 +34,10 @@ export const createReview = async (req, res) => {
   }
 };
 
-export const getReviews = async (req, res) => {
+export const getBarberReviews = async (req, res) => {
+  console.log(req.params.id);
   try {
-    const reviews = await Review.find();
+    const reviews = await Review.find({ barberShopID: req.params.id });
     res.status(200).json(reviews);
   } catch (error) {
     console.error(error);
@@ -77,6 +91,14 @@ export const deleteReview = async (req, res) => {
 
   try {
     const deletedReview = await Review.findByIdAndDelete(id);
+
+    const client = await Client.findById(deletedReview.clientID);
+    client.reviews.pull(id);
+    await client.save();
+
+    const barberShop = await BarberShop.findById(deletedReview.barberShopID);
+    barberShop.reviews.pull(id);
+    await barberShop.save();
 
     if (!deletedReview) {
       return res.status(404).json({ message: "Reseña no encontrada" });
