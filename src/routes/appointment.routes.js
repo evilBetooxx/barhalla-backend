@@ -13,7 +13,7 @@ import { createAppointmentSchema, updateAppointmentSchema } from "../schemas/app
 const router = Router();
 
 router.get("/appointments", authRequired, getAppointments);
-router.get("/user-appointments/:id", authRequired, getUserAppointments);
+router.get("/user-appointments", authRequired, getUserAppointments);
 router.post("/appointment", authRequired, validateSchema(createAppointmentSchema), createAppointment);
 router.put("/appointment/:id", authRequired, validateSchema(updateAppointmentSchema), updateAppointment);
 router.delete("/appointment/:id", authRequired, deleteAppointment);

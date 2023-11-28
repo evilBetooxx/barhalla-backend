@@ -13,7 +13,7 @@ export const getAppointments = async (req, res) => {
 };
 
 export const getUserAppointments = async (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.user.id;
   try {
     console.log(req.params.id);
     const appointments = await Appointment.find({ clientID: id });

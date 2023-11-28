@@ -1,4 +1,5 @@
 import BarberShop from "../models/barberShop.model.js";
+import mongoose from "mongoose";
 
 export const getBarberShops = async (req, res) => {
   try {
@@ -13,9 +14,10 @@ export const getBarberShops = async (req, res) => {
 };
 
 export const getUserBarberShops = async (req, res) => {
+  console.log(req.user._id);
   try {
-    const barberShops = await BarberShop.find({ owner: req.body.id });
-    res.json(barberShops);
+    const barberShops = await BarberShop.find();
+    res.status(200).json(barberShops);
   } catch (error) {
     res.status(500).json({
       message: "Error al obtener las barberías",
