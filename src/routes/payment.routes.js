@@ -3,7 +3,7 @@ import { createSession, createOrder, captureOrder, cancelOrder } from "../contro
 
 const router = Router();
 
-router.get('/create-checkout-session', createSession)
+router.post('/create-checkout-session', createSession)
 router.get('/succes', (req, res) => res.redirect('/') )
 router.get('/cancel', (req, res) => res.redirect('/') )
 

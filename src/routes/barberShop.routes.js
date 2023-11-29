@@ -45,12 +45,7 @@ router.get("/barbershops/search", authRequired, searchBarberShops);
 router.post("/barbershop", authRequired, createBarberShop);
 router.post("/upload-logo", [authRequired, upload.single("file")], uploadLogo);
 
-router.put(
-  " :id",
-  authRequired,
-  validateSchema(updateBarberShopSchema),
-  updateBarberShop
-);
+router.put("/barbershop/:id", authRequired, updateBarberShop);
 router.delete("/barbershop/:id", authRequired, deleteBarberShop);
 
 export default router;

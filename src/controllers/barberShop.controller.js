@@ -89,6 +89,7 @@ export const createBarberShop = async (req, res) => {
 };
 
 export const updateBarberShop = async (req, res) => {
+  console.log(req.body);
   try {
     const barberShop = await BarberShop.findByIdAndUpdate(
       req.params.id,
