@@ -72,12 +72,6 @@ const barberShopSchema = new mongoose.Schema(
         ref: "Review",
       },
     ],
-    payments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment",
-      },
-    ],
   },
   {
     timestamps: true,

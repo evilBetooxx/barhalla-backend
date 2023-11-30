@@ -3,9 +3,8 @@ import mongoose from "mongoose";
 const appointmentSchema = new mongoose.Schema(
   {
     date: {
-      type: Date,
-      required: true,
-      default: Date.now,
+      type: String,
+      required: true
     },
     time: {
       type: String,
@@ -28,12 +27,7 @@ const appointmentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "BarberShop",
       required: true,
-    },
-    paymentID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Payment",
-      required: true,
-    },
+    }
   },
   {
     timestamps: true,

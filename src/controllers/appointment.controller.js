@@ -1,9 +1,14 @@
 import Appointment from "../models/appointment.model.js";
+import Client from "../models/client.model.js";
+import BarberShop from "../models/barberShop.model.js";
 
 export const getAppointments = async (req, res) => {
   const { id } = req.user;
   try {
-    const appointments = await Appointment.find({clientID: id}).populate("clientID").populate("barberShopID").populate("paymentID");
+    const appointments = await Appointment.find({ clientID: id })
+      .populate("clientID")
+      .populate("barberShopID")
+      .populate("paymentID");
     res.json(appointments);
   } catch (error) {
     res
@@ -13,15 +18,50 @@ export const getAppointments = async (req, res) => {
 };
 
 export const getUserAppointments = async (req, res) => {
-  const { id } = req.user.id;
   try {
-    console.log(req.params.id);
-    const appointments = await Appointment.find({ clientID: id });
+    const appointments = await Appointment.find({ clientID: req.user.id }).populate('barberShopID');
     if (!appointments) {
       return res.status(404).json({ message: "Appointments not found" });
     }
-    console.log(appointments);
-    res.status(200).json(appointments);
+
+    const appointmentsWithBarberShopDetails = appointments.map(appointment => {
+      const { barberShopID, ...rest } = appointment.toObject();
+      return {
+        ...rest,
+        barberShopName: barberShopID.name,
+        barberShopLogo: barberShopID.logo, 
+      };
+    });
+
+    console.log(appointmentsWithBarberShopDetails);
+    res.status(200).json(appointmentsWithBarberShopDetails);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error al obtener la cita", error: error.message });
+  }
+};
+
+export const getBarberAppointments = async (req, res) => {
+  try {
+    const appointments = await Appointment.find({
+      barberShopID: req.params.id,
+    }).populate("clientID");
+    if (!appointments) {
+      return res.status(404).json({ message: "Appointments not found" });
+    }
+
+    const appointmentsWithClientNames = appointments.map((appointment) => {
+      const { clientID, ...rest } = appointment.toObject();
+      return {
+        ...rest,
+        name: clientID.firstName + " " + clientID.lastName,
+      };
+    });
+
+    console.log(appointmentsWithClientNames);
+
+    res.status(200).json(appointmentsWithClientNames);
   } catch (error) {
     res
       .status(500)
@@ -31,19 +71,30 @@ export const getUserAppointments = async (req, res) => {
 
 export const createAppointment = async (req, res) => {
   try {
-    const { date, time, barberShopID, paymentID } = req.body;
+    const { fecha, hora, nombre, precio, barberID } = req.body;
 
     const newAppointment = new Appointment({
-      date,
-      time,
+      date: fecha,
+      time: hora,
+      service: nombre,
+      price: precio,
       clientID: req.user.id,
-      barberShopID,
-      paymentID,
+      barberShopID: barberID,
     });
 
     const savedAppointment = await newAppointment.save();
+
+    const client = await Client.findById(req.user.id);
+    client.appointments.push(savedAppointment._id);
+    await client.save();
+
+    const barberShop = await BarberShop.findById(barberID);
+    barberShop.appointments.push(savedAppointment._id);
+    await barberShop.save();
+
     res.json(savedAppointment);
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ message: "Error al crear la cita", error: error.message });

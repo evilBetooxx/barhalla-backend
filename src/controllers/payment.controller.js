@@ -22,8 +22,8 @@ export const createSession = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:5173/barhalla/success",
-    cancel_url: "http://localhost:5173/barhalla/cancel",
+    success_url: "http://localhost:5173/success",
+    cancel_url: "http://localhost:5173/cancel",
   });
 
   res.json(session);
