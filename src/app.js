@@ -42,4 +42,13 @@ app.use("/barhalla", barbershopRoutes);
 app.use("/barhalla", paymentRoutes);
 app.use("/barhalla", reviewRoutes);
 
+io.on("connection", (socket) => {
+  socket.on("message", (body) => {
+    socket.broadcast.emit("message", {
+      body,
+      from: socket.id.slice(8),
+    });
+  });
+});
+
 export { server, io, app };
