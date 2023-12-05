@@ -45,8 +45,8 @@ export const createOrder = async (req, res) => {
       brand_name: "Barhalla",
       landing_page: "NO_PREFERENCE",
       user_action: "PAY_NOW",
-      return_url: `${process.env.HOST}/capture-order`,
-      cancel_url: `${process.env.HOST}/cancel-order`,
+      return_url: `${FRONT_URL}/capture-order`,
+      cancel_url: `${FRONT_URL}/cancel-order`,
     },
   };
 
