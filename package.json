@@ -29,6 +29,7 @@
     "multer-storage-cloudinary": "^4.0.0",
     "parser": "^0.1.4",
     "passport-google-oauth20": "^2.0.0",
+    "socket.io": "^4.7.2",
     "stripe": "^14.1.0",
     "zod": "^3.22.4"
   },
