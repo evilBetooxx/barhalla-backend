@@ -13,7 +13,7 @@ import barbershopRoutes from "./routes/barberShop.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 
-const client = process.env.CLIENT_URL || 'https://master.d1yw8juwp9b3zo.amplifyapp.com';
+const client = process.env.CLIENT_URL || 'https://master.d3nl2z0gc02g0c.amplifyapp.com';
 config();
 const app = express();
 const server = http.createServer(app);
