@@ -13,19 +13,20 @@ import barbershopRoutes from "./routes/barberShop.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 
+const client = process.env.CLIENT_URL || 'https://master.d1yw8juwp9b3zo.amplifyapp.com/';
 config();
 const app = express();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: client,
     credentials: true
   },
 });
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: client,
     credentials: true,
   })
 );
