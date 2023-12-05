@@ -18,14 +18,14 @@ const app = express();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: process.env.CLIENT_URL,
+    credentials: true
   },
 });
 
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
@@ -41,21 +41,5 @@ app.use("/barhalla", clientRoutes);
 app.use("/barhalla", barbershopRoutes);
 app.use("/barhalla", paymentRoutes);
 app.use("/barhalla", reviewRoutes);
-
-io.on("connection", (socket) => {
-  console.log("Client connected");
-});
-
-/*
-io.on("connection", (socket) => {
-  console.log(socket.id);
-  socket.on("message", (body) => {
-    socket.broadcast.emit("message", {
-      body,
-      from: socket.id.slice(8),
-    });
-  });
-}); 
-*/
 
 export { server, io, app };
