@@ -1,6 +1,7 @@
 import BarberShop from "../models/barberShop.model.js";
 import Client from "../models/client.model.js";
 import { v2 as cloudinary } from "cloudinary";
+import { io } from "../app.js";
 
 export const getBarberShops = async (req, res) => {
   try {
@@ -80,6 +81,7 @@ export const createBarberShop = async (req, res) => {
     await client.save();
     
     const savedBarberShop = await newBarberShop.save();
+    io.emit("newBarberShop", savedBarberShop.name);
     res.json(savedBarberShop);
   } catch (error) {
     res
